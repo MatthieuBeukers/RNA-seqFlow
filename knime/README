@@ -1,0 +1,38 @@
+IMPORTANT NOTES
+- These workflows were ment to test KNIME for making RNA-Seq analysis worfklows.
+- These workflows use the KNIME4NGS package to function. To install KNIME4NGS to Knime see ... or see the cookbook (will be added later).
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++wf_trmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference transcriptome.
+- As is, the workflow expects paired end read data to be as two seperate files (i.e.: reads_1.fastq, reads_2.fastq)
+
+
+Nodes to configure prior to running (!=must , *=optional):
+! [FileLoader]: Provide tab separated file containing paths to read data in fastq or fastq.gz format
+* [RawReadManipulator]: 
+! [Bowtie2]: Provide reference transcriptome ; set appropriate values for mapping parameters
+! [CSV Reader]: Provide tab separated file containing the deseq annotation/design
+* [DESeq]: Set appropriate parameters
+! [CSV Writer]: Provide path to a file to write deseq results to (if file doesn't exist it will be created)
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++wf_genmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference
+
+
+Nodes to configure prior to running (!=must , *=optional)
+! [FileLoader]: 
+* [RawReadManipulator]
+! [BWA]: Provide reference genome ; set appropriate values for mapping parameters
+! [FeatureCounts]: Provide genome annotation file in GTF format, set output folder (required)
+! [FeatureCountsMerger]:
+! [CSV Reader]:
+* [DESeq]:
+! [CSV Writer]: Provide path to a file to write deseq results to (if file doesn't exist it will be created)
+
+

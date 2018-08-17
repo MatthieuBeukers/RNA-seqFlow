@@ -1,0 +1,1072 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "wf_genmap_dea_alt", 
+    "steps": {
+        "0": {
+            "annotation": "Read a paired dataset collection (fastq or fastq.gz format) consisting of forward and reverse read data for two or more replicates belonging to the first condition.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Replicates Condition A", 
+            "name": "Input dataset collection", 
+            "outputs": [], 
+            "position": {
+                "left": 237.93333435058594, 
+                "top": 518
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"collection_type\": \"list:paired\"}", 
+            "tool_version": null, 
+            "type": "data_collection_input", 
+            "uuid": "c9a83395-92d6-42f7-8001-80b44d3f6ee6", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "d5163173-33fe-4ba3-8447-3a54a0501b2c"
+                }
+            ]
+        }, 
+        "1": {
+            "annotation": "Read a reference genome (fasta format) to map forward and reverse replicate read data to with BWA-MEM.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Reference genome", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 597.433349609375, 
+                "top": 849
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "fb3cb817-419e-48ec-aa27-d4b8992aea3a", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "f886d799-fd3c-4553-b7a8-aa1f951aa301"
+                }
+            ]
+        }, 
+        "2": {
+            "annotation": "Read a paired dataset collection (fastq or fastq.gz format) consisting of forward and reverse read data for two or more replicates belonging to the second condition.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Replicates Condition B", 
+            "name": "Input dataset collection", 
+            "outputs": [], 
+            "position": {
+                "left": 203.93333435058594, 
+                "top": 1238
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"collection_type\": \"list:paired\"}", 
+            "tool_version": null, 
+            "type": "data_collection_input", 
+            "uuid": "a4560564-a583-4fbd-9f23-aaa0eb784c74", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "d1c11e72-12fc-4433-949d-dba34df43420"
+                }
+            ]
+        }, 
+        "3": {
+            "annotation": "Read reference genome annotation data (in gtf format) that will be used by FeatureCounts for quantification.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Reference genome annotation", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 871.433349609375, 
+                "top": 853
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "7f7f2f4b-897b-4a50-b3a5-f18d2dd9bd69", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "564c62dd-e4a5-46ff-8401-70de92175159"
+                }
+            ]
+        }, 
+        "4": {
+            "annotation": "Perform FastQC on the forward and reverse replicate read data of the first condition prior to trimming and clipping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": "FastQC Condition A - Before trimming and clipping", 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 394.43333435058594, 
+                "top": 208
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "tool_shed_repository": {
+                "changeset_revision": "ff9530579d1f", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.71", 
+            "type": "tool", 
+            "uuid": "fcf9ee68-8144-46fe-b84b-599566212e51", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "html_file", 
+                    "uuid": "384a9190-09c6-481f-8f43-474fed4a5bb2"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "text_file", 
+                    "uuid": "f17aa01b-c1d0-4699-980f-60cdd19a3e37"
+                }
+            ]
+        }, 
+        "5": {
+            "annotation": "Perform trimming and clipping on paired replicate read data of the first condition with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "readtype|fastq_pair": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Trimmomatic", 
+                    "name": "readtype"
+                }
+            ], 
+            "label": "Trimmomatic Condition A", 
+            "name": "Trimmomatic", 
+            "outputs": [
+                {
+                    "name": "fastq_out_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r1_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r2_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r1_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r2_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 566.433349609375, 
+                "top": 462
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionfastq_out": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out"
+                }, 
+                "HideDatasetActionfastq_out_r1_paired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r1_paired"
+                }, 
+                "HideDatasetActionfastq_out_r1_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r1_unpaired"
+                }, 
+                "HideDatasetActionfastq_out_r2_paired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r2_paired"
+                }, 
+                "HideDatasetActionfastq_out_r2_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r2_unpaired"
+                }, 
+                "HideDatasetActionfastq_out_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_unpaired"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5", 
+            "tool_shed_repository": {
+                "changeset_revision": "dfa082f84068", 
+                "name": "trimmomatic", 
+                "owner": "pjbriggs", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"operation\\\": {\\\"window_size\\\": \\\"4\\\", \\\"name\\\": \\\"SLIDINGWINDOW\\\", \\\"__current_case__\\\": 0, \\\"required_quality\\\": \\\"20\\\"}}]\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"readtype\": \"{\\\"single_or_paired\\\": \\\"collection\\\", \\\"fastq_pair\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"illuminaclip\": \"{\\\"do_illuminaclip\\\": \\\"false\\\", \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "0.36.5", 
+            "type": "tool", 
+            "uuid": "a64ff9a0-1102-42f2-b224-27f84b9be25f", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "fastq_out_paired", 
+                    "uuid": "61610afc-278c-48d5-bed3-d8fa601d879f"
+                }
+            ]
+        }, 
+        "6": {
+            "annotation": "Perform FastQC on the forward and reverse replicate read data of the second condition prior to trimming and cliping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "input_file": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": "FastQC Condition B - Before trimming and clipping", 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 403.43333435058594, 
+                "top": 993
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "tool_shed_repository": {
+                "changeset_revision": "ff9530579d1f", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.71", 
+            "type": "tool", 
+            "uuid": "34aa3310-7e1b-458b-9022-bbe5098c71d5", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "html_file", 
+                    "uuid": "e01781ae-656c-4784-9334-b3c4841cec1a"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "text_file", 
+                    "uuid": "ffd2f7ec-7174-4986-bc82-509c8284baa5"
+                }
+            ]
+        }, 
+        "7": {
+            "annotation": "Perform trimming and clipping on paired replicate datasets with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "readtype|fastq_pair": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Trimmomatic", 
+                    "name": "readtype"
+                }
+            ], 
+            "label": "Trimmomatic Condition B", 
+            "name": "Trimmomatic", 
+            "outputs": [
+                {
+                    "name": "fastq_out_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r1_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r2_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r1_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r2_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 493.433349609375, 
+                "top": 1260
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionfastq_out": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out"
+                }, 
+                "HideDatasetActionfastq_out_r1_paired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r1_paired"
+                }, 
+                "HideDatasetActionfastq_out_r1_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r1_unpaired"
+                }, 
+                "HideDatasetActionfastq_out_r2_paired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r2_paired"
+                }, 
+                "HideDatasetActionfastq_out_r2_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r2_unpaired"
+                }, 
+                "HideDatasetActionfastq_out_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_unpaired"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5", 
+            "tool_shed_repository": {
+                "changeset_revision": "dfa082f84068", 
+                "name": "trimmomatic", 
+                "owner": "pjbriggs", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"operation\\\": {\\\"window_size\\\": \\\"4\\\", \\\"name\\\": \\\"SLIDINGWINDOW\\\", \\\"__current_case__\\\": 0, \\\"required_quality\\\": \\\"20\\\"}}]\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"readtype\": \"{\\\"single_or_paired\\\": \\\"collection\\\", \\\"fastq_pair\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"illuminaclip\": \"{\\\"do_illuminaclip\\\": \\\"false\\\", \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "0.36.5", 
+            "type": "tool", 
+            "uuid": "11402203-c292-4d31-9d79-2c2f34017868", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "fastq_out_paired", 
+                    "uuid": "02087d52-fc05-4d13-9925-89fd26908531"
+                }
+            ]
+        }, 
+        "8": {
+            "annotation": "Perform FastQC on the forward and reverse replicate read data of the first condition after trimming and clipping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "input_file": {
+                    "id": 5, 
+                    "output_name": "fastq_out_paired"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": "FastQC Condition A - After trimming and clipping", 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 786.433349609375, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "tool_shed_repository": {
+                "changeset_revision": "ff9530579d1f", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.71", 
+            "type": "tool", 
+            "uuid": "a4ab75b5-acc6-4cba-9ea1-4115617e6df7", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "html_file", 
+                    "uuid": "158e44ee-29e1-4637-ac1c-12d17f0e764a"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "text_file", 
+                    "uuid": "c9891143-c40f-4512-b760-306442a94cc5"
+                }
+            ]
+        }, 
+        "9": {
+            "annotation": "Map forward and reverse replicate read data of the first condition to the supplied reference genome.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 5, 
+                    "output_name": "fastq_out_paired"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM", 
+                    "name": "reference_source"
+                }, 
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM", 
+                    "name": "fastq_input"
+                }
+            ], 
+            "label": "BWA-MEM Genome mapping Condition A", 
+            "name": "Map with BWA-MEM", 
+            "outputs": [
+                {
+                    "name": "bam_output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 872.433349609375, 
+                "top": 497
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "8d2a528a9513", 
+                "name": "bwa", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"rg\": \"{\\\"rg_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 3}\", \"fastq_input\": \"{\\\"iset_stats\\\": \\\"\\\", \\\"__current_case__\\\": 2, \\\"fastq_input_selector\\\": \\\"paired_collection\\\", \\\"fastq_input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"analysis_type\": \"{\\\"analysis_type_selector\\\": \\\"illumina\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"reference_source_selector\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"index_a\\\": \\\"auto\\\"}\"}", 
+            "tool_version": "0.7.17.1", 
+            "type": "tool", 
+            "uuid": "66504387-c8fc-4f25-8779-c0feab59c418", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "bam_output", 
+                    "uuid": "0e6125bd-1819-4f35-9453-49b73deb1323"
+                }
+            ]
+        }, 
+        "10": {
+            "annotation": "Perform FastQC on the forward and reverse replicate read data of the first condition after trimming and clipping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "input_file": {
+                    "id": 7, 
+                    "output_name": "fastq_out_paired"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": "FastQC Condition B - After trimming and clipping", 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 743.1666870117188, 
+                "top": 1006.2333374023438
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "tool_shed_repository": {
+                "changeset_revision": "ff9530579d1f", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.71", 
+            "type": "tool", 
+            "uuid": "26611d91-771f-4168-869b-b61e79e95163", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "html_file", 
+                    "uuid": "ec4f96e8-ca71-41ca-bfc8-ec0bd675d558"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "text_file", 
+                    "uuid": "a47dc097-1d5f-42cd-a2e1-fd8815ff500c"
+                }
+            ]
+        }, 
+        "11": {
+            "annotation": "Map forward and reverse replicate read data of the second condition to the supplied reference genome for the second condition.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 7, 
+                    "output_name": "fastq_out_paired"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM", 
+                    "name": "reference_source"
+                }, 
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM", 
+                    "name": "fastq_input"
+                }
+            ], 
+            "label": "BWA-MEM Genome mappng Condition B", 
+            "name": "Map with BWA-MEM", 
+            "outputs": [
+                {
+                    "name": "bam_output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 796.6666870117188, 
+                "top": 1301.2333984375
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "8d2a528a9513", 
+                "name": "bwa", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"rg\": \"{\\\"rg_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 3}\", \"fastq_input\": \"{\\\"iset_stats\\\": \\\"\\\", \\\"__current_case__\\\": 2, \\\"fastq_input_selector\\\": \\\"paired_collection\\\", \\\"fastq_input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"analysis_type\": \"{\\\"analysis_type_selector\\\": \\\"illumina\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"reference_source_selector\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"index_a\\\": \\\"auto\\\"}\"}", 
+            "tool_version": "0.7.17.1", 
+            "type": "tool", 
+            "uuid": "ccfe9c80-443b-473a-b8b8-7f0d75dbf097", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "bam_output", 
+                    "uuid": "f220b3ca-ecdf-4c7e-98af-3f3358098ade"
+                }
+            ]
+        }, 
+        "12": {
+            "annotation": "Quantify the read counts from the genome mapping with FeatureCounts for the first condition.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.0.5", 
+            "errors": null, 
+            "id": 12, 
+            "input_connections": {
+                "alignment": {
+                    "id": 9, 
+                    "output_name": "bam_output"
+                }, 
+                "anno|reference_gene_sets": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool featureCounts", 
+                    "name": "anno"
+                }, 
+                {
+                    "description": "runtime parameter for tool featureCounts", 
+                    "name": "alignment"
+                }
+            ], 
+            "label": "FeatureCounts Quantification Condition A", 
+            "name": "featureCounts", 
+            "outputs": [
+                {
+                    "name": "output_medium", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_short", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_full", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_summary", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_feature_lengths", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_jcounts", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1172.433349609375, 
+                "top": 493
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_feature_lengths": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_feature_lengths"
+                }, 
+                "HideDatasetActionoutput_full": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_full"
+                }, 
+                "HideDatasetActionoutput_jcounts": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_jcounts"
+                }, 
+                "HideDatasetActionoutput_medium": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_medium"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.0.5", 
+            "tool_shed_repository": {
+                "changeset_revision": "386220cf6877", 
+                "name": "featurecounts", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"pe_parameters\": \"{\\\"only_both_ends\\\": \\\"false\\\", \\\"exclude_chimerics\\\": \\\"true\\\", \\\"fragment_counting_enabled\\\": {\\\"fragment_counting\\\": \\\"\\\", \\\"__current_case__\\\": 1}}\", \"format\": \"\\\"tabdel_short\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"include_feature_length_file\": \"\\\"false\\\"\", \"anno\": \"{\\\"anno_select\\\": \\\"history\\\", \\\"reference_gene_sets\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"extended_parameters\": \"{\\\"gff_feature_attribute\\\": \\\"gene_id\\\", \\\"exon_exon_junction_read_counting_enabled\\\": {\\\"__current_case__\\\": 1, \\\"count_exon_exon_junction_reads\\\": \\\"false\\\"}, \\\"read_extension_3p\\\": \\\"0\\\", \\\"frac_overlap_feature\\\": \\\"0\\\", \\\"strand_specificity\\\": \\\"0\\\", \\\"read_extension_5p\\\": \\\"0\\\", \\\"mapping_quality\\\": \\\"12\\\", \\\"frac_overlap\\\": \\\"0\\\", \\\"primary\\\": \\\"false\\\", \\\"count_split_alignments_only\\\": \\\"false\\\", \\\"by_read_group\\\": \\\"false\\\", \\\"min_overlap\\\": \\\"1\\\", \\\"contribute_to_multiple_features\\\": \\\"false\\\", \\\"ignore_dup\\\": \\\"false\\\", \\\"summarization_level\\\": \\\"false\\\", \\\"largest_overlap\\\": \\\"false\\\", \\\"read_reduction\\\": \\\"\\\", \\\"multimapping_enabled\\\": {\\\"multimapping_counts\\\": \\\"\\\", \\\"__current_case__\\\": 1}, \\\"long_reads\\\": \\\"false\\\", \\\"gff_feature_type\\\": \\\"exon\\\"}\", \"alignment\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "1.6.0.5", 
+            "type": "tool", 
+            "uuid": "33651124-0e71-446f-a1e7-c74eb07ea375", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_summary", 
+                    "uuid": "20d6bcb6-9461-4013-953f-e1c92c59e080"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_short", 
+                    "uuid": "8ec870d8-b54a-4543-b2ce-ca270812794d"
+                }
+            ]
+        }, 
+        "13": {
+            "annotation": "Quantify the read counts from the genome mapping with FeatureCounts for the second condition.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.0.5", 
+            "errors": null, 
+            "id": 13, 
+            "input_connections": {
+                "alignment": {
+                    "id": 11, 
+                    "output_name": "bam_output"
+                }, 
+                "anno|reference_gene_sets": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool featureCounts", 
+                    "name": "anno"
+                }, 
+                {
+                    "description": "runtime parameter for tool featureCounts", 
+                    "name": "alignment"
+                }
+            ], 
+            "label": "FeatureCounts Quantification Condition B", 
+            "name": "featureCounts", 
+            "outputs": [
+                {
+                    "name": "output_medium", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_short", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_full", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_summary", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_feature_lengths", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_jcounts", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1172.1666870117188, 
+                "top": 1136.2333374023438
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_feature_lengths": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_feature_lengths"
+                }, 
+                "HideDatasetActionoutput_full": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_full"
+                }, 
+                "HideDatasetActionoutput_jcounts": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_jcounts"
+                }, 
+                "HideDatasetActionoutput_medium": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_medium"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.0.5", 
+            "tool_shed_repository": {
+                "changeset_revision": "386220cf6877", 
+                "name": "featurecounts", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"pe_parameters\": \"{\\\"only_both_ends\\\": \\\"false\\\", \\\"exclude_chimerics\\\": \\\"true\\\", \\\"fragment_counting_enabled\\\": {\\\"fragment_counting\\\": \\\"\\\", \\\"__current_case__\\\": 1}}\", \"format\": \"\\\"tabdel_short\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"include_feature_length_file\": \"\\\"false\\\"\", \"anno\": \"{\\\"anno_select\\\": \\\"history\\\", \\\"reference_gene_sets\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"extended_parameters\": \"{\\\"gff_feature_attribute\\\": \\\"gene_id\\\", \\\"exon_exon_junction_read_counting_enabled\\\": {\\\"__current_case__\\\": 1, \\\"count_exon_exon_junction_reads\\\": \\\"false\\\"}, \\\"read_extension_3p\\\": \\\"0\\\", \\\"frac_overlap_feature\\\": \\\"0\\\", \\\"strand_specificity\\\": \\\"0\\\", \\\"read_extension_5p\\\": \\\"0\\\", \\\"mapping_quality\\\": \\\"12\\\", \\\"frac_overlap\\\": \\\"0\\\", \\\"primary\\\": \\\"false\\\", \\\"count_split_alignments_only\\\": \\\"false\\\", \\\"by_read_group\\\": \\\"false\\\", \\\"min_overlap\\\": \\\"1\\\", \\\"contribute_to_multiple_features\\\": \\\"false\\\", \\\"ignore_dup\\\": \\\"false\\\", \\\"summarization_level\\\": \\\"false\\\", \\\"largest_overlap\\\": \\\"false\\\", \\\"read_reduction\\\": \\\"\\\", \\\"multimapping_enabled\\\": {\\\"multimapping_counts\\\": \\\"\\\", \\\"__current_case__\\\": 1}, \\\"long_reads\\\": \\\"false\\\", \\\"gff_feature_type\\\": \\\"exon\\\"}\", \"alignment\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "1.6.0.5", 
+            "type": "tool", 
+            "uuid": "fb040ffa-6365-4fac-9a6f-60b95e5dbc7a", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_summary", 
+                    "uuid": "a76ecc16-67a9-4f4a-9523-b1921f80dbf9"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_short", 
+                    "uuid": "1ce29f59-19dd-45ee-ba3f-58efea680d94"
+                }
+            ]
+        }, 
+        "14": {
+            "annotation": "Removes the header line from the count files produced by FeatureCounts so it can be used by DESeq2.", 
+            "content_id": "Remove beginning1", 
+            "errors": null, 
+            "id": 14, 
+            "input_connections": {
+                "input": {
+                    "id": 12, 
+                    "output_name": "output_short"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove beginning", 
+                    "name": "input"
+                }
+            ], 
+            "label": "Remove header Condition A", 
+            "name": "Remove beginning", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1495.933349609375, 
+                "top": 546
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "Remove beginning1", 
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"num_lines\": \"\\\"1\\\"\", \"__page__\": null}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "uuid": "c065c2ea-d7e8-48c4-b6ef-d0453e744ef2", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "out_file1", 
+                    "uuid": "1235b429-8642-46f9-83cb-729389bc72c8"
+                }
+            ]
+        }, 
+        "15": {
+            "annotation": "Removes the header line from the count files produced by FeatureCounts so it can be used by DESeq2.", 
+            "content_id": "Remove beginning1", 
+            "errors": null, 
+            "id": 15, 
+            "input_connections": {
+                "input": {
+                    "id": 13, 
+                    "output_name": "output_short"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove beginning", 
+                    "name": "input"
+                }
+            ], 
+            "label": "Remove header Condition B", 
+            "name": "Remove beginning", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1489.6666259765625, 
+                "top": 1196.2333374023438
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "Remove beginning1", 
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"num_lines\": \"\\\"1\\\"\", \"__page__\": null}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "uuid": "83e21c47-3752-4fbc-be2f-492752329c9e", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "out_file1", 
+                    "uuid": "751ab0d0-7145-4090-8a1a-113c809bafd4"
+                }
+            ]
+        }, 
+        "16": {
+            "annotation": "Perform differential gene expression analysis between the two conditions using the headerless FeatureCounts count files.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.1", 
+            "errors": null, 
+            "id": 16, 
+            "input_connections": {
+                "rep_factorName_0|rep_factorLevel_0|countsFile": {
+                    "id": 14, 
+                    "output_name": "out_file1"
+                }, 
+                "rep_factorName_0|rep_factorLevel_1|countsFile": {
+                    "id": 15, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "label": "DESeq2 -Differential Expression Conditions A&B", 
+            "name": "DESeq2", 
+            "outputs": [
+                {
+                    "name": "split_output", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "deseq_out", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "plots", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "counts_out", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1821.433349609375, 
+                "top": 885
+            }, 
+            "post_job_actions": {
+                "HideDatasetActioncounts_out": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "counts_out"
+                }, 
+                "HideDatasetActionplots": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "plots"
+                }, 
+                "HideDatasetActionsplit_output": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "split_output"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "d0c39b5e78cf", 
+                "name": "deseq2", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"fit_type\": \"\\\"1\\\"\", \"__page__\": null, \"tximport\": \"{\\\"tximport_selector\\\": \\\"count\\\", \\\"__current_case__\\\": 1}\", \"outlier_replace_off\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"auto_mean_filter_off\": \"\\\"false\\\"\", \"rep_factorName\": \"[{\\\"__index__\\\": 0, \\\"factorName\\\": \\\"condition\\\", \\\"rep_factorLevel\\\": [{\\\"__index__\\\": 0, \\\"factorLevel\\\": \\\"control\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"factorLevel\\\": \\\"treated\\\", \\\"countsFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]}]\", \"normCounts\": \"\\\"false\\\"\", \"outlier_filter_off\": \"\\\"false\\\"\", \"many_contrasts\": \"\\\"false\\\"\", \"pdf\": \"\\\"false\\\"\"}", 
+            "tool_version": "2.11.40.1", 
+            "type": "tool", 
+            "uuid": "2caccc5a-499d-4ff6-9e4c-6235499a6650", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "deseq_out", 
+                    "uuid": "f3341a4a-6a00-4276-a011-107aecb660f8"
+                }
+            ]
+        }
+    }, 
+    "tags": [], 
+    "uuid": "63899da8-0cb8-46d2-9b3c-2ba61293b3ed"
+}

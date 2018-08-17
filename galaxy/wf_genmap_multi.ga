@@ -1,0 +1,487 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "wf_genmap_multi", 
+    "steps": {
+        "0": {
+            "annotation": "Read a paired dataset collection.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "FastQ paired dataset collection", 
+            "name": "Input dataset collection", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 659
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"collection_type\": \"list:paired\"}", 
+            "tool_version": null, 
+            "type": "data_collection_input", 
+            "uuid": "698872a8-5062-4579-bcf3-b321ad404377", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "d26c00e7-935d-4ea6-a7f6-8beb3649377a"
+                }
+            ]
+        }, 
+        "1": {
+            "annotation": "Read the reference genome file (fasta format) to be used in the genome mapping process.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Reference genome", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 700, 
+                "top": 285
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "4df634a9-e919-4471-a68a-a3ff64b56bb0", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "559d5eef-18cf-4b11-af49-c0370b543671"
+                }
+            ]
+        }, 
+        "2": {
+            "annotation": "Genome annotation data in GFF3 format.", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Genome annotation data", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 1003, 
+                "top": 780
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "6a49262a-9574-451f-8893-ada0d1bb3d67", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "69ef7b22-800c-448a-9168-0c63a3ccf887"
+                }
+            ]
+        }, 
+        "3": {
+            "annotation": "Perform quality trimming and clipping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "readtype|fastq_pair": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Trimmomatic", 
+                    "name": "readtype"
+                }
+            ], 
+            "label": "Trimmomatic - Trimming and clipping", 
+            "name": "Trimmomatic", 
+            "outputs": [
+                {
+                    "name": "fastq_out_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r1_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r2_paired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r1_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out_r2_unpaired", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "fastq_out", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 490.43333435058594, 
+                "top": 442.43333435058594
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionfastq_out": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out"
+                }, 
+                "HideDatasetActionfastq_out_r1_paired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r1_paired"
+                }, 
+                "HideDatasetActionfastq_out_r1_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r1_unpaired"
+                }, 
+                "HideDatasetActionfastq_out_r2_paired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r2_paired"
+                }, 
+                "HideDatasetActionfastq_out_r2_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_r2_unpaired"
+                }, 
+                "HideDatasetActionfastq_out_unpaired": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fastq_out_unpaired"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5", 
+            "tool_shed_repository": {
+                "changeset_revision": "dfa082f84068", 
+                "name": "trimmomatic", 
+                "owner": "pjbriggs", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"operation\\\": {\\\"window_size\\\": \\\"4\\\", \\\"name\\\": \\\"SLIDINGWINDOW\\\", \\\"__current_case__\\\": 0, \\\"required_quality\\\": \\\"20\\\"}}]\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"readtype\": \"{\\\"single_or_paired\\\": \\\"collection\\\", \\\"fastq_pair\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"illuminaclip\": \"{\\\"do_illuminaclip\\\": \\\"false\\\", \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "0.36.5", 
+            "type": "tool", 
+            "uuid": "27226728-ec55-4345-b369-d2f550c45d44", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "fastq_out_paired", 
+                    "uuid": "3a15413c-026f-48e0-94d9-cefdaa3551b7"
+                }
+            ]
+        }, 
+        "4": {
+            "annotation": "Perform FastQC on forward and reverse read data prior to trimming and clipping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": "FastQC - Before trimming and clipping", 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 426, 
+                "top": 881
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "tool_shed_repository": {
+                "changeset_revision": "ff9530579d1f", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.71", 
+            "type": "tool", 
+            "uuid": "8db57925-5d0c-438c-829c-b911cf4a7c65", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "html_file", 
+                    "uuid": "bfee89db-335f-4409-9f8c-647629f72ff9"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "text_file", 
+                    "uuid": "59eb6bf1-abad-4f8a-96cf-1f85887a59a2"
+                }
+            ]
+        }, 
+        "5": {
+            "annotation": "Map each forward and reverse read data pairs to the supplied reference genome using BWA-MEM.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 3, 
+                    "output_name": "fastq_out_paired"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM", 
+                    "name": "reference_source"
+                }, 
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM", 
+                    "name": "fastq_input"
+                }
+            ], 
+            "label": "Genome mapping with BWA-MEM", 
+            "name": "Map with BWA-MEM", 
+            "outputs": [
+                {
+                    "name": "bam_output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 904.5, 
+                "top": 488
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "8d2a528a9513", 
+                "name": "bwa", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"rg\": \"{\\\"rg_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 3}\", \"fastq_input\": \"{\\\"iset_stats\\\": \\\"\\\", \\\"__current_case__\\\": 2, \\\"fastq_input_selector\\\": \\\"paired_collection\\\", \\\"fastq_input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"analysis_type\": \"{\\\"analysis_type_selector\\\": \\\"illumina\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"reference_source_selector\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"index_a\\\": \\\"auto\\\"}\"}", 
+            "tool_version": "0.7.17.1", 
+            "type": "tool", 
+            "uuid": "f0a3e9f0-8fa8-420f-b606-dc4a300e7738", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "bam_output", 
+                    "uuid": "5324dd94-0896-4a72-aa94-0f0c5cb94e40"
+                }
+            ]
+        }, 
+        "6": {
+            "annotation": "Perform FastQC on forward and reverse read data after trimming and clipping with Trimmomatic.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "input_file": {
+                    "id": 3, 
+                    "output_name": "fastq_out_paired"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": "FastQC - After trimming and clipping", 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 877, 
+                "top": 921
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71", 
+            "tool_shed_repository": {
+                "changeset_revision": "ff9530579d1f", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.71", 
+            "type": "tool", 
+            "uuid": "c8ad6e7b-b69b-43ab-8f09-8fb3f5bca597", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "html_file", 
+                    "uuid": "7143b1a9-ecbe-4491-8f8f-2d4ac2926d1e"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "text_file", 
+                    "uuid": "93196b18-732c-4a2b-9336-7632835a5508"
+                }
+            ]
+        }, 
+        "7": {
+            "annotation": "Quantify read counts from genome mappings using FeatureCounts.", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.0.5", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "alignment": {
+                    "id": 5, 
+                    "output_name": "bam_output"
+                }, 
+                "anno|reference_gene_sets": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool featureCounts", 
+                    "name": "anno"
+                }, 
+                {
+                    "description": "runtime parameter for tool featureCounts", 
+                    "name": "alignment"
+                }
+            ], 
+            "label": "FeatureCounts quantification", 
+            "name": "featureCounts", 
+            "outputs": [
+                {
+                    "name": "output_medium", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_short", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_full", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_summary", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_feature_lengths", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_jcounts", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1277.433349609375, 
+                "top": 657.433349609375
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_feature_lengths": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_feature_lengths"
+                }, 
+                "HideDatasetActionoutput_full": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_full"
+                }, 
+                "HideDatasetActionoutput_jcounts": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_jcounts"
+                }, 
+                "HideDatasetActionoutput_medium": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_medium"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.0.5", 
+            "tool_shed_repository": {
+                "changeset_revision": "386220cf6877", 
+                "name": "featurecounts", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"pe_parameters\": \"{\\\"only_both_ends\\\": \\\"false\\\", \\\"exclude_chimerics\\\": \\\"true\\\", \\\"fragment_counting_enabled\\\": {\\\"fragment_counting\\\": \\\"\\\", \\\"__current_case__\\\": 1}}\", \"format\": \"\\\"tabdel_short\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"include_feature_length_file\": \"\\\"false\\\"\", \"anno\": \"{\\\"anno_select\\\": \\\"history\\\", \\\"reference_gene_sets\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"extended_parameters\": \"{\\\"gff_feature_attribute\\\": \\\"gene_id\\\", \\\"exon_exon_junction_read_counting_enabled\\\": {\\\"__current_case__\\\": 1, \\\"count_exon_exon_junction_reads\\\": \\\"false\\\"}, \\\"read_extension_3p\\\": \\\"0\\\", \\\"frac_overlap_feature\\\": \\\"0\\\", \\\"strand_specificity\\\": \\\"0\\\", \\\"read_extension_5p\\\": \\\"0\\\", \\\"mapping_quality\\\": \\\"12\\\", \\\"frac_overlap\\\": \\\"0\\\", \\\"primary\\\": \\\"false\\\", \\\"count_split_alignments_only\\\": \\\"false\\\", \\\"by_read_group\\\": \\\"false\\\", \\\"min_overlap\\\": \\\"1\\\", \\\"contribute_to_multiple_features\\\": \\\"false\\\", \\\"ignore_dup\\\": \\\"false\\\", \\\"summarization_level\\\": \\\"false\\\", \\\"largest_overlap\\\": \\\"false\\\", \\\"read_reduction\\\": \\\"\\\", \\\"multimapping_enabled\\\": {\\\"multimapping_counts\\\": \\\"\\\", \\\"__current_case__\\\": 1}, \\\"long_reads\\\": \\\"false\\\", \\\"gff_feature_type\\\": \\\"exon\\\"}\", \"alignment\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "1.6.0.5", 
+            "type": "tool", 
+            "uuid": "0ec98d0e-c9db-4996-8db9-72b99ff1818d", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_summary", 
+                    "uuid": "175a46e2-da9f-46ea-964a-68293e464078"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_short", 
+                    "uuid": "98557ca7-2146-465f-a84f-283406fcb1d6"
+                }
+            ]
+        }
+    }, 
+    "tags": [], 
+    "uuid": "4ee7ec75-e492-41ef-91e1-b4b417532880"
+}
