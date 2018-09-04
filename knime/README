@@ -1,18 +1,55 @@
-IMPORTANT NOTES
+IMPORTANT NOTES:
 - These workflows were ment to test KNIME for making RNA-Seq analysis worfklows.
 - These workflows use the KNIME4NGS package to function. To install KNIME4NGS to Knime see ... or see the cookbook (will be added later).
+- The coloured boxes in each workflow display the workload: green=light and quick, yellow=moderate, red=heavy and long
+
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-++wf_trmap_dea
+++Workflow: wf_genmap_dea
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-- This workflow can be used to map paired end read data to a reference transcriptome.
+- This workflow can be used to map paired end read data to a reference genome and subsequently perform differential expression analysis
+
+Nodes to configure prior to running (!=must , *=optional)
+! [FileLoader]: Provide tab separated file containing paths to read data in fastq or fastq.gz format
+* [FastQC]
+* [RawReadManipulator]
+* [FastQC]
+! [BWA]: Provide reference genome ; set appropriate values for mapping parameters
+! [FeatureCounts]: Provide genome annotation file in GTF format, set output folder (required)
+! [FeatureCountsMerger]: Provide location and name for output file that will contain the merged count tables ()
+! [CSV Reader]: Provide tab separated file containing the deseq annotation/design
+* [DESeq]
+! [CSV Writer]: Provide path to a file to write deseq results to (if file doesn't exist it will be created)
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_genmap_multi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map and quantify many paired read datasets to a reference genome
+
+Nodes to configure prior to running (!=must, *=optional)
+! [FileLoader]: Provide tab separated file containing paths to read data in fastq or fastq.gz format
+* [FastQC]
+* [RawReadManipulator]
+* [FastQC]
+! [BWA]: Provide reference genome
+! [FeatureCounts]: Provide genome annotation file in GTF format, set output folder (required)
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_trmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference transcriptome and subsequently perform differential expression analysis
 - As is, the workflow expects paired end read data to be as two seperate files (i.e.: reads_1.fastq, reads_2.fastq)
-
 
 Nodes to configure prior to running (!=must , *=optional):
 ! [FileLoader]: Provide tab separated file containing paths to read data in fastq or fastq.gz format
-* [RawReadManipulator]: 
-! [Bowtie2]: Provide reference transcriptome ; set appropriate values for mapping parameters
+* [FastQC]
+* [RawReadManipulator]
+* [FastQC]
+! [Bowtie2]: Provide reference transcriptome
 ! [CSV Reader]: Provide tab separated file containing the deseq annotation/design
 * [DESeq]: Set appropriate parameters
 ! [CSV Writer]: Provide path to a file to write deseq results to (if file doesn't exist it will be created)
@@ -20,19 +57,34 @@ Nodes to configure prior to running (!=must , *=optional):
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-++wf_genmap_dea
+++Workflow: wf_trmap_multi
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-- This workflow can be used to map paired end read data to a reference
+- This workflow can be used to map and quantify many paired read datasets to the genome
 
-
-Nodes to configure prior to running (!=must , *=optional)
-! [FileLoader]: 
+Nodes to configure prior to running (!=must, *=optional)
+! [FileLoader]: Provide tab separated file containing paths to read data in fastq or fastq.gz format
+* [FastQC]
 * [RawReadManipulator]
-! [BWA]: Provide reference genome ; set appropriate values for mapping parameters
-! [FeatureCounts]: Provide genome annotation file in GTF format, set output folder (required)
-! [FeatureCountsMerger]:
-! [CSV Reader]:
-* [DESeq]:
-! [CSV Writer]: Provide path to a file to write deseq results to (if file doesn't exist it will be created)
+* [FastQC]
+! [Bowtie2]: Provide reference transcriptome
 
 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ A few questions and answers
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q: What type of sequencing data do the workflows expect as input?
+A: The workflows expect paired end (Illumina) read data with forward and reverse reads in separate fastq or fastq.gz files
+
+Q: Any advice on the folder structure for the input and output data?
+A: As the output locations cannot be changed for most nodes, it might be helpful to keep each paired end read data in a separate folder as output from
+	most processing nodes will be saved in the same folder.
+
+Q: What if I want to use different tools than those in the workflow?
+A: For some workflow steps such as read mapping, multiple tools are available (bowtie2, STAR, Razer, segemehl, ...) whereas for other steps might be
+	very few tools available. You therefore might need to make nodes for those tools or use other nodes such as code snippet nodes or the external tool
+	node.
+
+Q: Are there any things to keep in mind?
+A: Nodes from the KNIME4NGS package require the binaries of tools (bowtie2, STAR, FeatureCounts, etc) to be present as a binary. It is best to
+	configure the KNIME4NGS package within KNIME so the nodes will always know where the required binaries are.

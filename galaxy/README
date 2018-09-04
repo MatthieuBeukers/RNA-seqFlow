@@ -1,0 +1,77 @@
+IMPORTANT NOTES
+- These workflows were ment to test Galaxy for making RNA-Seq workflows
+- When choosing to run the workflow, the steps might not appear in the correct order in the overview
+- These workflows all expect dataset collections as input ; not all tools can work with these types of input
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_genmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference genome and subsequently perform differential expression analysis
+- The DESeq2 tool at minimum requires a factor with two levels to be set ; a factor 'condition' with the levels: 'control' and 'treated' for example.
+
+
+Tools that require input:
+- [Replicates Condition A]: Dataset collection of replicate paired end read data for the first condition in fastq or fastq.gz format
+- [Replicates Condition B]: Dataset collection of replicate paired end read data for the second condition in fastq or fastq.gz format
+- [Reference genome]: Reference genome sequence in FASTA format
+- [Reference genome annotation]: Reference genome annotation file in GTF format
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_genmap_multi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map many paired end read datasets to a reference genome
+
+
+Tools that require input
+- [FastQ paired dataset collection]: Dataset collection of paired end read data fastq or fastq.gz format
+- [Reference genome]: Reference genome sequence in FASTA format
+- [Reference genome annotation]: Reference genome annotation file in GTF format
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_trmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference transcriptome and subsequently perform differential expression analysis
+- The DESeq2 tool at minimum requires a factor with two levels to be set; a factor 'condition' with the levels: 'control' and 'treated' for example.
+
+
+Tools that require input
+- [Replicates Condition A]: Dataset collection of replicate paired end read data for the first condition in fastq or fastq.gz format
+- [Replicates Condition B]: Dataset collection of replicate paired end read data for the second condition in fastq or fastq.gz format
+- [Reference transcriptome]: Reference transcriptome sequences in FASTA format.
+- [Transcript-to-Gene]: A two column file with transcript identifiers in the first and gene identifiers (to which the transcript belongs to) in the second
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_trmap_multi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map many paired end read datasets to a reference transcriptome
+
+
+Tools that require input
+- [FastQ paired dataset collection]: Dataset collection of paired end read data fastq or fastq.gz format
+- [Reference transcriptome]: Reference transcriptome sequences in FASTA format
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++A few questions and answers
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q: Can these workflows be run without modification?
+A: Yes, however, users may want to rename output files tools creates.
+
+Q: I have newer/older tool versions, can the workflow still be run?
+A: Generally workflows can be run with different tool versions, but results may differ. If the same tool is from a different repository, workflows might
+	not work properly.
+
+Q: Why do the workflows use dataset collections as input?
+A: Dataset collections were chosen as they allow for a different numer of replicate datasets to be used without having to change the workflow. 
+
+Q: What is the transcript to gene table that the transcriptome differential expression analysis workflow (wf_trmap_dea) requires?
+A: The DESeq2 tool used for differential expression analysis in this workflow reports differential expression per gene. The transcript to gene table
+	consists of two columns. The first contains transcript identifiers, the second contains gene identifiers.

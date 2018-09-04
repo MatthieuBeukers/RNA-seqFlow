@@ -1,0 +1,76 @@
+IMPORTANT NOTES
+- These workflows were meant to test CLC for making RNA-Seq workflows
+- This project used and ran the non installer versions of the workflows (workflows ending in .clc) from the workflow editor
+- The multi mapping workflows 'wf_genmap_multi' and 'wf_trmap_multi' are meant to be run in batch mode
+- Users may want to configure the output nodes of a workflow to give output files a convenient name
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_genmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference genome and subsequently perform differential expression analysis
+
+Input nodes required to configure
+- [R1CA]: First replicate paired end read data for the first condition
+- [R2CA]: Second replicate paired end read data for the first condition
+- [R1CB]: First replicate paired end read data for the second condition
+- [R2CB]: Second replicate paired end read data for the second condition
+- [Reference transcriptome]: Reference genome sequence in FASTA format (please see Q&A down below)
+- [Gene Track]: Gene track created from the GTF genome annotation file
+- [mRNA Track]: mRNA track created from the GTF genome annotation file
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_genmap_multi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map many paired end read datasets to a reference genome
+
+Input node required to configure
+- [Genome Reference]: Reference genome sequence in FASTA format (please see Q&A down below)
+- [Gene Track File]: Gene track created from the GTF genome annotation file
+- [mRNA Track File]: mRNA track created from the GTF genome annotation file
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_trmap_dea
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map paired end read data to a reference transcriptome and subsequently perform differential expression analysis
+
+
+Input nodes required to configure
+- [R1CA]: First replicate paired end read data for the first condition
+- [R2CA]: Second replicate paired end read data for the first condition
+- [R1CB]: First replicate paired end read data for the second condition
+- [R2CB]: Second replicate paired end read data for the second condition
+- [Reference transcriptome]: Reference transcriptome sequences in FASTA format
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++Workflow: wf_trmap_multi
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- This workflow can be used to map many paired end read datasets to a reference transcriptome
+
+Input node required to configure
+- [Transcriptome Reference]: Reference genome sequence in FASTA format (please see Q&A down below)
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++A few questions and answers
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q: What is the way to run the workflows?
+A: These workflows were ment to be run from the workflow editor, not as installed tools. So opening the .clc workflow file in the editor and running
+	them from there would be the best method.
+
+Q: How do I get the required Gene and mRNA tracks?
+A: Gene and mRNA tracks can be obtained in CLC from the GTF file.
+
+Q: The input for the reference genome in genome differential expression workflow (wf_genmap_dea) is called 'Reference transcriptome'?
+A: This is a mistake in the labelling of this input node. A reference genome should be provided.
+
+Q: Are you required to configure the 'SRR read data' node in the wf_genmap_multi and wf_trmap_multi workflows?
+A: For these workflows the input node 'SRR read data' does not need to be configured. When running the workflow in batch mode, the selected input
+	files will enter the workflow via the 'SRR read data' input node.
